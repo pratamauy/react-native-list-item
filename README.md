@@ -5,6 +5,6 @@ Setup React native menggunakan expo CLI ,link berikut:
   
 Start project menggunakan device pribadi:
   - Download expo di playstore
-  - Start on terminal IDE "npm start"
+  - Open Project ,Start project on terminal IDE "npm start"
   - buka expo android scan barcode expo yang terdapat di web
   
