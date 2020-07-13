@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Button,
+  FlatList
+} from 'react-native';
 
 import DataItem from './components/DataItem';
 import DataInput from './components/DataInput';
@@ -7,6 +12,7 @@ import DataInput from './components/DataInput';
 export default function App() {
 
   const [addInput, setAddInput] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
   const addInputHandler = addTitle => {
     setAddInput(
@@ -14,6 +20,7 @@ export default function App() {
         ...currentAdd,
         { id: Math.random().toString(), value: addTitle }
       ]);
+    setIsAddMode(false);
   };
 
   const removeHandler = itemId => {
@@ -24,20 +31,20 @@ export default function App() {
     );
   };
 
+  const cancelHandler = () => {
+    setIsAddMode(false);
+  }
+
   return (
     <View style={styles.screen}>
 
-      <DataInput onAddData={addInputHandler} />
+      <Button title="Add New Data" onPress={() => setIsAddMode(true)} />
 
-      {/* <ScrollView>
-        {
-          addInput.map((add) =>
-            <View key={add} style={styles.listItem}>
-              <Text>{add}</Text>
-            </View>
-          )
-        }
-      </ScrollView> */}
+      <DataInput
+        visible={isAddMode}
+        onAddData={addInputHandler}
+        onCancel={cancelHandler}
+      />
 
       <FlatList
         keyExtractor={(item, index) => item.id}

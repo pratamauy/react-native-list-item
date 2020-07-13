@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { View, Button, TextInput, StyleSheet } from 'react-native';
+import {
+    View,
+    Button,
+    TextInput,
+    StyleSheet,
+    Modal
+} from 'react-native';
 
 const DataInput = props => {
 
@@ -9,16 +15,29 @@ const DataInput = props => {
         setDataInput(inputText);
     }
 
+    const addDataInputHandler = () => {
+        props.onAddData(dataInput);
+        setDataInput('');
+    }
+
     return (
-        <View style={styles.inputContainer}>
-            <TextInput
-                placeholder="Di isi Bos!"
-                style={styles.input}
-                onChangeText={dataInputHandler}
-                value={dataInput}
-            />
-            <Button title="ADD" onPress={props.onAddData.bind(this, dataInput)} />
-        </View>
+        <Modal visible={props.visible} animationType="slide">
+            <View style={styles.inputContainer}>
+                <TextInput
+                    placeholder="Di isi Bos!"
+                    style={styles.input}
+                    onChangeText={dataInputHandler}
+                    value={dataInput}
+                />
+                <View style={styles.buttonContainer}>
+                    <View>
+                    <Button title="ADD" onPress={addDataInputHandler} />
+                    </View>
+                    <View></View>
+                    <Button title="CANCEL" color="red" onPress={props.onCancel} />
+                </View>
+            </View>
+        </Modal>
     );
 
 };
@@ -26,8 +45,8 @@ const DataInput = props => {
 const styles = StyleSheet.create({
 
     inputContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flex: 1,
+        justifyContent: 'center',
         alignItems: 'center'
     },
 
@@ -35,8 +54,19 @@ const styles = StyleSheet.create({
         width: '80%',
         borderColor: 'black',
         borderWidth: 1,
-        padding: 10
+        padding: 10,
+        marginBottom: 10
     },
+
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width:'60%'
+    },
+
+    button:{
+        width:'40%'
+    }
 
 });
 
