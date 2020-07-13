@@ -30,11 +30,12 @@ const DataInput = props => {
                     value={dataInput}
                 />
                 <View style={styles.buttonContainer}>
-                    <View>
-                    <Button title="ADD" onPress={addDataInputHandler} />
+                    <View style={styles.button}>
+                        <Button title="ADD" onPress={addDataInputHandler} />
                     </View>
-                    <View></View>
-                    <Button title="CANCEL" color="red" onPress={props.onCancel} />
+                    <View style={styles.button}>
+                        <Button title="CANCEL" color="red" onPress={props.onCancel} />
+                    </View>
                 </View>
             </View>
         </Modal>
@@ -61,11 +62,11 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width:'60%'
+        width: '60%'
     },
 
-    button:{
-        width:'40%'
+    button: {
+        width: '40%'
     }
 
 });
